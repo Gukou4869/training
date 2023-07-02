@@ -1,9 +1,10 @@
 import Image from "next/image";
 import styles from "./page.module.css";
+import styles2 from "./test.module.scss";
 
 export default function Home() {
   return (
-    <main className={styles.main}>
+    <main className={styles2.test}>
       <div className={styles.description}>
         <p>
           Get started by editing&nbsp;
