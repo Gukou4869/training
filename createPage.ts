@@ -16,26 +16,53 @@ if (!/^[a-z][a-z0-9_]*$/i.test(pageName)) {
   process.exit(1);
 }
 
-const dirPath = path.join(__dirname, `/pages/${pageName}`);
-const filePath = path.join(dirPath, "index.js");
-
-// ディレクトリが存在しない場合だけ新規作成
-if (!fs.existsSync(dirPath)) {
-  fs.mkdirSync(dirPath, { recursive: true });
-}
+// ファイルパスを定義
+const indexPath = path.join(__dirname, "/src/pages/index.ts");
+const componentPath = path.join(
+  __dirname,
+  `/src/components/pages/${pageName}.tsx`
+);
+const stylePath = path.join(
+  __dirname,
+  `/src/components/pages/${pageName}.module.scss`
+);
 
 // ファイルが存在しない場合だけ新規作成
-if (!fs.existsSync(filePath)) {
+if (!fs.existsSync(indexPath)) {
   fs.writeFileSync(
-    filePath,
-    `export default function ${
+    indexPath,
+    `import ${
       pageName.charAt(0).toUpperCase() + pageName.slice(1)
-    }() {
+    } from '../components/pages/${pageName}';
+
+  export default function Index() {
+    return <${pageName.charAt(0).toUpperCase() + pageName.slice(1)} />;
+  }`
+  );
+}
+
+if (!fs.existsSync(componentPath)) {
+  fs.writeFileSync(
+    componentPath,
+    `import styles from './${pageName}.module.scss';
+
+  export default function ${
+    pageName.charAt(0).toUpperCase() + pageName.slice(1)
+  }() {
     return (
-      <div>
+      <div className={styles.container}>
         <h1>This is ${pageName.charAt(0).toUpperCase() + pageName.slice(1)}</h1>
       </div>
     )
+  }`
+  );
+}
+
+if (!fs.existsSync(stylePath)) {
+  fs.writeFileSync(
+    stylePath,
+    `.container {
+    color: red;
   }`
   );
 }
