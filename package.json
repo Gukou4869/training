@@ -52,6 +52,7 @@
     "storybook": "^7.0.24",
     "stylelint": "^15.9.0",
     "stylelint-config-standard": "^33.0.0",
-    "stylelint-order": "^6.0.3"
+    "stylelint-order": "^6.0.3",
+    "ts-node": "^10.9.1"
   }
 }
