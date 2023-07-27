@@ -17,15 +17,21 @@ if (!/^[a-z][a-z0-9_]*$/i.test(pageName)) {
 }
 
 // ファイルパスを定義
-const indexPath = path.join(__dirname, "/src/pages/index.ts");
-const componentPath = path.join(
+const indexPath = path.join(__dirname, `/src/pages/${pageName}/index.tsx`);
+const componentDirPath = path.join(
   __dirname,
-  `/src/components/pages/${pageName}.tsx`
+  `/src/components/pages/${pageName}`
 );
-const stylePath = path.join(
-  __dirname,
-  `/src/components/pages/${pageName}.module.scss`
-);
+const componentPath = path.join(componentDirPath, `index.tsx`);
+const stylePath = path.join(componentDirPath, `${pageName}.module.scss`);
+// ディレクトリが存在しない場合だけ新規作成
+if (!fs.existsSync(path.dirname(indexPath))) {
+  fs.mkdirSync(path.dirname(indexPath), { recursive: true });
+}
+
+if (!fs.existsSync(componentDirPath)) {
+  fs.mkdirSync(componentDirPath, { recursive: true });
+}
 
 // ファイルが存在しない場合だけ新規作成
 if (!fs.existsSync(indexPath)) {
@@ -33,7 +39,7 @@ if (!fs.existsSync(indexPath)) {
     indexPath,
     `import ${
       pageName.charAt(0).toUpperCase() + pageName.slice(1)
-    } from '../components/pages/${pageName}';
+    } from '@/components/pages/${pageName}';
 
   export default function Index() {
     return <${pageName.charAt(0).toUpperCase() + pageName.slice(1)} />;
