@@ -20,7 +20,7 @@ if (!/^[a-z][a-z0-9_]*$/i.test(pageName)) {
 
 const componentDirPath = path.join(__dirname, `/src/components/pages/${pageName}`);
 const indexPath = path.join(__dirname, `/src/pages/${pageName}/index.tsx`);
-const componentPath = path.join(componentDirPath, "index.tsx");
+const pageComponentPath = path.join(componentDirPath, "index.tsx");
 const stylePath = path.join(componentDirPath, `${pageName}.module.scss`);
 const storybookPath = path.join(componentDirPath, `${pageName}.stories.tsx`);
 const testPath = path.join(componentDirPath, `${pageName}.test.tsx`);
@@ -46,7 +46,7 @@ export default function ${pageName}() {
 }`,
   },
   {
-    path: componentPath,
+    path: pageComponentPath,
     content: `import styles from './${pageName}.module.scss';
 
 export default function ${capitalizedPageName}() {
@@ -65,23 +65,23 @@ export default function ${capitalizedPageName}() {
   },
   {
     path: storybookPath,
-    content: `import React from 'react';
-import { Meta, Story } from '@storybook/react';
-import ${capitalizedPageName} from './${pageName}';
-
-export default {
-  title: 'Pages/${capitalizedPageName}',
-  component: ${capitalizedPageName},
-} as Meta;
-
-const Template: Story = () => <${capitalizedPageName}  />;
-
-export const ${capitalizedPageName} = Template.bind({});`,
+    content: `import { StoryFn, Meta } from '@storybook/react';
+    import ${capitalizedPageName} from '.';
+    
+    export default {
+      title: 'Pages/${capitalizedPageName}',
+      component: ${capitalizedPageName},
+    } as Meta;
+    
+    const Template: StoryFn = () => <${capitalizedPageName} />;
+    
+    export const Default = Template.bind({});
+    Default.storyName = "${capitalizedPageName}"`,
   },
   {
     path: testPath,
     content: `import { render, screen } from '@testing-library/react';
-import ${capitalizedPageName} from './${pageName}';
+import ${capitalizedPageName} from '.';
 
 test('renders learn react link', () => {
   render(<${capitalizedPageName} />);

@@ -14,7 +14,8 @@
     "prepare": "husky install",
     "lint:style": "stylelint '**/*.{scss}'",
     "lint:style:fix": "stylelint --fix '**/*.{scss}'",
-    "generate:page": "tsc createPage.ts && node createPage.js"
+    "gen:page": "ts-node createPage.ts",
+    "gen:comp": "ts-node createComponent.ts"
   },
   "lint-staged": {
     "*.{ts,tsx}": "eslint --cache --fix",
