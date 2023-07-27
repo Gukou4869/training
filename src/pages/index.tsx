@@ -1,8 +1,5 @@
 "use client";
 
-import Image from "next/image";
-import styles from "./page.module.css";
-import styles2 from "./test.module.scss";
 import Link from "next/link";
 import { useStore } from "@/stores";
 
@@ -33,7 +30,7 @@ const ResetButton = () => {
 
 export default function Home() {
   return (
-    <main className={styles2.test}>
+    <main>
       <Link href={"/login"}>Login Page!!!</Link>
       <Count />
       <IncreaseCount />

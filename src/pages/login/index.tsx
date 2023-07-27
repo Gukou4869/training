@@ -1,5 +1,4 @@
 import { signUp } from "@/lib/firebase/utils/auth";
-import { useStore } from "@/stores";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
