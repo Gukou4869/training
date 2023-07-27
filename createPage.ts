@@ -1,13 +1,15 @@
 const fs = require("fs");
 const path = require("path");
+const readline = require("readline");
 
-// process.argv配列の2番目の要素（0から始まるインデックス）がコマンドライン引数
-const pageName = process.argv[2];
+const pageName = process.argv[2].toLowerCase();
 
 if (!pageName) {
   console.error("Error: Page name must be provided.");
   process.exit(1);
 }
+
+const capitalizedPageName = `${pageName.charAt(0).toUpperCase()}${pageName.slice(1)}`;
 
 if (!/^[a-z][a-z0-9_]*$/i.test(pageName)) {
   console.error(
@@ -16,15 +18,79 @@ if (!/^[a-z][a-z0-9_]*$/i.test(pageName)) {
   process.exit(1);
 }
 
-// ファイルパスを定義
+const componentDirPath = path.join(__dirname, `/src/components/pages/${pageName}`);
 const indexPath = path.join(__dirname, `/src/pages/${pageName}/index.tsx`);
-const componentDirPath = path.join(
-  __dirname,
-  `/src/components/pages/${pageName}`
-);
-const componentPath = path.join(componentDirPath, `index.tsx`);
+const componentPath = path.join(componentDirPath, "index.tsx");
 const stylePath = path.join(componentDirPath, `${pageName}.module.scss`);
-// ディレクトリが存在しない場合だけ新規作成
+const storybookPath = path.join(componentDirPath, `${pageName}.stories.tsx`);
+const testPath = path.join(componentDirPath, `${pageName}.test.tsx`);
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+
+interface FileToWrite {
+  path: string;
+  content: string;
+}
+
+const existingFiles: string[] = [];
+const filesToWrite: FileToWrite[] = [
+  {
+    path: indexPath,
+    content: `import ${capitalizedPageName} from '../../components/pages/${pageName}';
+
+export default function ${pageName}() {
+  return <${capitalizedPageName} />;
+}`,
+  },
+  {
+    path: componentPath,
+    content: `import styles from './${pageName}.module.scss';
+
+export default function ${capitalizedPageName}() {
+  return (
+    <div className={styles.container}>
+      <h1>This is ${capitalizedPageName}</h1>
+    </div>
+  )
+}`,
+  },
+  {
+    path: stylePath,
+    content: `.container {
+  color: red;
+}`,
+  },
+  {
+    path: storybookPath,
+    content: `import React from 'react';
+import { Meta, Story } from '@storybook/react';
+import ${capitalizedPageName} from './${pageName}';
+
+export default {
+  title: 'Pages/${capitalizedPageName}',
+  component: ${capitalizedPageName},
+} as Meta;
+
+const Template: Story = () => <${capitalizedPageName}  />;
+
+export const ${capitalizedPageName} = Template.bind({});`,
+  },
+  {
+    path: testPath,
+    content: `import { render, screen } from '@testing-library/react';
+import ${capitalizedPageName} from './${pageName}';
+
+test('renders learn react link', () => {
+  render(<${capitalizedPageName} />);
+  const linkElement = screen.getByText(/learn react/i);
+  expect(linkElement).toBeInTheDocument();
+});`,
+  },
+];
+
 if (!fs.existsSync(path.dirname(indexPath))) {
   fs.mkdirSync(path.dirname(indexPath), { recursive: true });
 }
@@ -33,42 +99,29 @@ if (!fs.existsSync(componentDirPath)) {
   fs.mkdirSync(componentDirPath, { recursive: true });
 }
 
-// ファイルが存在しない場合だけ新規作成
-if (!fs.existsSync(indexPath)) {
-  fs.writeFileSync(
-    indexPath,
-    `import ${
-      pageName.charAt(0).toUpperCase() + pageName.slice(1)
-    } from '@/components/pages/${pageName}';
+filesToWrite.forEach((file) => {
+  if (fs.existsSync(file.path)) {
+    existingFiles.push(file.path);
+  }
+});
 
-  export default function Index() {
-    return <${pageName.charAt(0).toUpperCase() + pageName.slice(1)} />;
-  }`
+if (existingFiles.length > 0) {
+  rl.question(
+    `The following files already exist. Do you want to override them? (y/n) \n${existingFiles.join("\n")}\n`,
+    (answer: string) => {
+      if (answer.toLowerCase() === "y") {
+        filesToWrite.forEach((file) => {
+          fs.writeFileSync(file.path, file.content);
+          console.log(`${file.path} has been overwritten.`);
+        });
+      }
+      rl.close();
+    }
   );
-}
-
-if (!fs.existsSync(componentPath)) {
-  fs.writeFileSync(
-    componentPath,
-    `import styles from './${pageName}.module.scss';
-
-  export default function ${
-    pageName.charAt(0).toUpperCase() + pageName.slice(1)
-  }() {
-    return (
-      <div className={styles.container}>
-        <h1>This is ${pageName.charAt(0).toUpperCase() + pageName.slice(1)}</h1>
-      </div>
-    )
-  }`
-  );
-}
-
-if (!fs.existsSync(stylePath)) {
-  fs.writeFileSync(
-    stylePath,
-    `.container {
-    color: red;
-  }`
-  );
+} else {
+  filesToWrite.forEach((file) => {
+    fs.writeFileSync(file.path, file.content);
+    console.log(`${file.path} has been created.`);
+  });
+  rl.close();
 }

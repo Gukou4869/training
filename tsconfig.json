@@ -25,6 +25,6 @@
   },
   // Lint ".storybook" folder (don't ignore it)
   "ignorePatterns": ["!.storybook"],
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "createPage.ts"],
   "exclude": ["node_modules"]
 }
