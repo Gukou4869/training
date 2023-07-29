@@ -1,5 +1,85 @@
-.container {
+.button {
   align-items: center;
+  border: 2px solid var(--light-border-focused, #0017c1);
+  border-radius: 8px;
+  box-shadow: 0 4px 4px 0 rgb(0 0 0 / 25%);
+  box-sizing: border-box;
+  cursor: pointer;
   display: flex;
+  font-weight: 700;
+  gap: 10px;
   justify-content: center;
+  outline: none;
+  padding: 16px;
+  width: 256px;
+
+  &:disabled {
+    cursor: default;
+  }
+}
+
+.primary {
+  background: #0017c1;
+  color: white;
+
+  &:hover {
+    background: #000082;
+  }
+
+  &:active {
+    background: #000082;
+  }
+
+  &:focus {
+    border: 2px solid var(--light-border-focused, #d18d0f);
+  }
+
+  &:disabled {
+    background: var(--light-button-disabled, #949497);
+    border: 2px solid var(--light-border-focused, #949497);
+  }
+}
+
+.secondary {
+  border: 2px solid var(--light-button-normal, #0017c1);
+  color: #0017c1;
+
+  &:hover {
+    background: #e8f1fe;
+  }
+
+  &:active {
+    background: #e8f1fe;
+  }
+
+  &:focus {
+    border: 2px solid var(--light-border-focused, #d18d0f);
+  }
+
+  &:disabled {
+    border: 2px solid var(--light-border-focused, #949497);
+    color: var(--light-button-disabled, #949497);
+  }
+}
+
+.tertiary {
+  border: 2px solid var(--light-border-focused, #fff);
+  box-shadow: 0 0 0 0;
+  text-decoration-line: underline;
+
+  &:hover {
+    color: #000082;
+  }
+
+  &:active {
+    color: #000082;
+  }
+
+  &:focus {
+    border: 2px solid var(--light-border-focused, #d18d0f);
+  }
+
+  &:disabled {
+    color: var(--light-button-disabled, #949497);
+  }
 }

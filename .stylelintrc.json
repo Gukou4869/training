@@ -1,17 +1,11 @@
 {
   "plugins": ["stylelint-order"],
-  "extends": ["stylelint-config-standard"],
+  "extends": ["stylelint-config-standard", "stylelint-scss"],
   "rules": {
     "at-rule-no-unknown": [
       true,
       {
-        "ignoreAtRules": [
-          "tailwind",
-          "apply",
-          "variants",
-          "responsive",
-          "screen"
-        ]
+        "ignoreAtRules": ["tailwind", "apply", "variants", "responsive", "screen"]
       }
     ],
     "string-quotes": "double",
