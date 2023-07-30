@@ -1,6 +1,8 @@
+@use "/src/styles/ui-mixins" as *;
+
 .button {
   align-items: center;
-  border: 2px solid var(--light-border-focused, #0017c1);
+  border: 2px solid theme(textlight, link);
   border-radius: 8px;
   box-shadow: 0 4px 4px 0 rgb(0 0 0 / 25%);
   box-sizing: border-box;
@@ -19,29 +21,29 @@
 }
 
 .primary {
-  background: #0017c1;
-  color: white;
+  background: theme(textlight, link);
+  color: theme(textlight, onfill);
 
   &:hover {
-    background: #000082;
+    background: theme(textlight, hover);
   }
 
   &:active {
-    background: #000082;
+    background: theme(textlight, active);
   }
 
   &:focus {
-    border: 2px solid var(--light-border-focused, #d18d0f);
+    border: 2px solid theme(textlight, focus);
   }
 
   &:disabled {
-    background: var(--light-button-disabled, #949497);
-    border: 2px solid var(--light-border-focused, #949497);
+    background: theme(borderlight, disabled);
+    border: 2px solid theme(borderlight, disabled);
   }
 }
 
 .secondary {
-  border: 2px solid var(--light-button-normal, #0017c1);
+  border: 2px solid theme(textlight, link);
   color: #0017c1;
 
   &:hover {
@@ -53,34 +55,35 @@
   }
 
   &:focus {
-    border: 2px solid var(--light-border-focused, #d18d0f);
+    border: 2px solid theme(textlight, link);
   }
 
   &:disabled {
     background: none;
-    border: 2px solid var(--light-border-focused, #949497);
-    color: var(--light-button-disabled, #949497);
+    border: 2px solid theme(borderlight, disabled);
+    color: theme(borderlight, disabled);
   }
 }
 
 .tertiary {
-  border: 2px solid var(--light-border-focused, #fff);
+  border: 2px solid theme(textlight, onfill);
   box-shadow: 0 0 0 0;
+  color: theme(textlight, link);
   text-decoration-line: underline;
 
   &:hover {
-    color: #000082;
+    color: theme(textlight, hover);
   }
 
   &:active {
-    color: #000082;
+    color: theme(textlight, active);
   }
 
   &:focus {
-    border: 2px solid var(--light-border-focused, #d18d0f);
+    border: 2px solid theme(textlight, focus);
   }
 
   &:disabled {
-    color: var(--light-button-disabled, #949497);
+    color: theme(borderlight, disabled);
   }
 }

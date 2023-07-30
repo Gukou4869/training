@@ -1,16 +1,27 @@
 {
+  "extends": ["stylelint-config-standard-scss"],
   "plugins": ["stylelint-order"],
-  "extends": ["stylelint-config-standard", "stylelint-scss"],
+  "overrides": [
+    {
+      "files": ["*.scss", "**/*.scss"],
+      "customSyntax": "postcss-scss"
+    }
+  ],
   "rules": {
-    "at-rule-no-unknown": [
+    "selector-class-pattern": "^[a-z][a-zA-Z0-9]+$",
+    "scss/at-mixin-pattern": "^[a-z][a-zA-Z0-9]+$",
+    "scss/dollar-variable-pattern": "^[a-z][a-zA-Z0-9]+$",
+    "scss/dollar-variable-colon-space-after": null,
+    "order/order": ["custom-properties", "dollar-variables", "at-rules", "declarations", "rules"],
+    "order/properties-alphabetical-order": true,
+    "value-no-vendor-prefix": [true, { "ignoreValues": ["box"] }],
+    "property-no-vendor-prefix": [true, { "ignoreProperties": ["background-clip"] }],
+    "selector-pseudo-class-no-unknown": [
       true,
       {
-        "ignoreAtRules": ["tailwind", "apply", "variants", "responsive", "screen"]
+        "ignorePseudoClasses": ["global"]
       }
-    ],
-    "string-quotes": "double",
-    "order/properties-alphabetical-order": true
+    ]
   },
-
-  "ignoreFiles": ["**/node_modules/**"]
+  "ignoreFiles": ["build/", "dist/", "storybook-static", "node_modules/"]
 }

@@ -15,7 +15,8 @@
     "lint:style": "stylelint '**/*.{scss}'",
     "lint:style:fix": "stylelint --fix '**/*.{scss}'",
     "gen:page": "ts-node createPage.ts",
-    "gen:comp": "ts-node createComponent.ts"
+    "gen:comp": "ts-node createComponent.ts",
+    "gen:design-tokens": "json-to-scss ./src/styles/tokens/**/*.json ./src/styles/tokens --k='dq'"
   },
   "lint-staged": {
     "*.{ts,tsx}": "eslint --cache --fix",
@@ -51,6 +52,7 @@
     "@storybook/testing-library": "^0.0.14-next.2",
     "eslint-plugin-storybook": "^0.6.12",
     "husky": "^8.0.0",
+    "json-to-scss": "^1.6.2",
     "lint-staged": "^13.2.3",
     "prettier": "^2.8.8",
     "sass": "^1.63.6",
@@ -58,6 +60,7 @@
     "stylelint": "^15.9.0",
     "stylelint-config-sass-guidelines": "^10.0.0",
     "stylelint-config-standard": "^33.0.0",
+    "stylelint-config-standard-scss": "^10.0.0",
     "stylelint-order": "^6.0.3",
     "stylelint-scss": "^5.0.1",
     "ts-node": "^10.9.1"

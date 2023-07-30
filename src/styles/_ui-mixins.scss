@@ -1,0 +1,5 @@
+@use "./tokens/themeTokens.scss" as *;
+
+@function theme($token, $property) {
+  @return map-get(map-get($themeTokens, $token), $property);
+}

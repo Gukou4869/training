@@ -1,0 +1,23 @@
+{
+  "textlight": {
+    "body": "#1A1A1C",
+    "description": "#626264",
+    "placeholder": "#757578",
+    "onfill": "#FFF",
+    "link": "#0017C1",
+    "hover": "#000082",
+    "active": "#000082",
+    "visited": "#000082",
+    "alert": "#EC0000",
+    "disabled": "#626264",
+    "focus": "#d18d0f"
+  },
+  "borderlight": {
+    "field": "#1A1A1C",
+    "devider": "#D8D8DB",
+    "focused": "#D18D0F",
+    "selected": "#0017C1",
+    "alart": "#EC0000",
+    "disabled": "#949497"
+  }
+}
