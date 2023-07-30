@@ -57,6 +57,7 @@
   }
 
   &:disabled {
+    background: none;
     border: 2px solid var(--light-border-focused, #949497);
     color: var(--light-button-disabled, #949497);
   }

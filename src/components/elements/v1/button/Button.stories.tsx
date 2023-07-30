@@ -1,6 +1,5 @@
 import { StoryFn, Meta } from "@storybook/react";
 import Button, { ButtonProps, ButtonType } from ".";
-import { table } from "console";
 
 export default {
   title: "Components/Button",
@@ -9,7 +8,6 @@ export default {
 
 const Template: StoryFn<ButtonProps> = () => {
   const typeVariants: ButtonType[] = ["primary", "secondary", "tertiary"];
-  const buttonState = ["normal", "hover", "active", "focused", "diabled"];
 
   return (
     <table summary="Button Component Style List">
