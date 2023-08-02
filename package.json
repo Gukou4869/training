@@ -16,7 +16,8 @@
     "lint:style:fix": "stylelint --fix '**/*.{scss}'",
     "gen:page": "ts-node createPage.ts",
     "gen:comp": "ts-node createComponent.ts",
-    "gen:design-tokens": "json-to-scss ./src/styles/tokens/**/*.json ./src/styles/tokens --k='dq'"
+    "gen:design-tokens": "json-to-scss ./src/styles/tokens/**/*.json ./src/styles/tokens --k='dq'",
+    "test": "jest --watch"
   },
   "lint-staged": {
     "*.{ts,tsx}": "eslint --cache --fix",
@@ -25,7 +26,6 @@
   "dependencies": {
     "@material/button": "^14.0.0",
     "@mui/material": "^5.14.2",
-    "@testing-library/react": "^14.0.0",
     "@types/firebase": "^3.2.1",
     "@types/node": "20.3.3",
     "@types/react": "18.2.14",
@@ -50,8 +50,12 @@
     "@storybook/nextjs": "^7.0.24",
     "@storybook/react": "^7.0.24",
     "@storybook/testing-library": "^0.0.14-next.2",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^14.0.0",
     "eslint-plugin-storybook": "^0.6.12",
     "husky": "^8.0.0",
+    "jest": "^29.6.2",
+    "jest-environment-jsdom": "^29.6.2",
     "json-to-scss": "^1.6.2",
     "lint-staged": "^13.2.3",
     "prettier": "^2.8.8",

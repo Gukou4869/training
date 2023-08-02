@@ -31,10 +31,10 @@ export interface ButtonProps {
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
-  const { type = "primary", text, className, disabled } = props;
+  const { type = "primary", text, className, disabled, onClick } = props;
 
   return (
-    <button className={cx(className, styles.button, styles[type])} disabled={disabled}>
+    <button className={cx(className, styles.button, styles[type])} disabled={disabled} onClick={onClick}>
       {text}
     </button>
   );
