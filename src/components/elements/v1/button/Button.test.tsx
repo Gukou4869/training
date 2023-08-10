@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import userEvent from "@testing-library/user-event";
 import Button from ".";
@@ -21,10 +21,12 @@ describe("Button", () => {
     expect(button).toBeDisabled();
   });
 
-  test("fires onClick prop when clicked", () => {
+  test("fires onClick prop when clicked", async () => {
     const onClick = jest.fn();
+    const user = userEvent.setup();
+
     const { getByText } = render(<Button text="Test button" onClick={onClick} />);
-    userEvent.click(getByText("Test button"));
+    await user.click(getByText("Test button"));
     expect(onClick).toHaveBeenCalled();
   });
 });

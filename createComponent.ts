@@ -1,3 +1,5 @@
+// command: npm run gen:comp ${component name}
+
 {
   const fs = require("fs");
   const path = require("path");
@@ -15,7 +17,7 @@
 import styles from './${capitalizedComponentName}.module.scss';
 
 export interface ${capitalizedComponentName}Props {
-  // ここにPropsの型定義を書くことができます。
+  // you can write prop here
 }
 
 const ${capitalizedComponentName}: FC<${capitalizedComponentName}Props> = (props) => {
@@ -38,7 +40,7 @@ export default ${capitalizedComponentName};
   `,
     [path.join(componentPath, `${capitalizedComponentName}.test.tsx`)]: `import React from 'react';
   import { render, screen } from '@testing-library/react';
-  import ${capitalizedComponentName} from '.}';
+  import ${capitalizedComponentName} from '.';
 
   test('renders learn react link', () => {
     render(<${capitalizedComponentName} />);
