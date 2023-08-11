@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useStore } from "@/stores";
+import Head from "next/head";
 
 const Count = () => {
   const count = useStore((state) => state.count);
@@ -30,11 +31,16 @@ const ResetButton = () => {
 
 export default function Home() {
   return (
-    <main>
-      <Link href={"/login"}>Login Page!!!</Link>
-      <Count />
-      <IncreaseCount />
-      <ResetButton />
-    </main>
+    <div>
+      <Head>
+        <title>Training Support App</title>
+      </Head>
+      <main>
+        <Link href={"/login"}>Login Page!!!</Link>
+        <Count />
+        <IncreaseCount />
+        <ResetButton />
+      </main>
+    </div>
   );
 }
