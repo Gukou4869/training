@@ -1,3 +1,4 @@
+import type { FC } from "react";
 import React, { useRef } from "react";
 
 import Button from "../button";
@@ -8,14 +9,18 @@ import styles from "./Form.module.scss";
 
 export interface FormProps {
   // you can write prop here
+  onSubmit: (email: string, password: string) => void;
 }
 
-const FormComponent = () => {
+const Form: FC<FormProps> = (props) => {
+  const { onSubmit } = props;
+
   const emailRef = useRef("");
   const passwordRef = useRef("");
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(emailRef.current, passwordRef.current);
+    onSubmit(emailRef.current, passwordRef.current);
   };
 
   return (
@@ -45,4 +50,4 @@ const FormComponent = () => {
   );
 };
 
-export default FormComponent;
+export default Form;

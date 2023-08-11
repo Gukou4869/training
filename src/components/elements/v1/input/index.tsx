@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import type { CSSProperties, ForwardRefRenderFunction } from "react";
+import React, { forwardRef, useState } from "react";
+import type { CSSProperties } from "react";
 
 import cx from "classnames";
 
@@ -20,7 +20,7 @@ export interface InputProps {
   width?: CSSProperties["width"];
 }
 
-const Input: ForwardRefRenderFunction<string | null, InputProps> = (props, ref) => {
+const Input = forwardRef<string | null, InputProps>((props, ref) => {
   const [isFocused, setIsFocused] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
@@ -44,10 +44,8 @@ const Input: ForwardRefRenderFunction<string | null, InputProps> = (props, ref) 
   } as CSSProperties;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // Refのcurrentプロパティに入力の値をセット
     if (ref && typeof ref === "object" && ref.current !== null) {
       ref.current = e.target.value;
-      console.log(ref.current, "❤️");
     }
 
     onChange && onChange(e);
@@ -61,8 +59,10 @@ const Input: ForwardRefRenderFunction<string | null, InputProps> = (props, ref) 
       </label>
       {supportText && <span>{supportText}</span>}
       <input
+        autoComplete={type}
         className={cx(styles.input, errorMassage && styles.error)}
-        id="input"
+        id={id}
+        name={id}
         onBlur={() => setIsFocused(false)}
         onChange={handleChange}
         onFocus={() => setIsFocused(true)}
@@ -85,6 +85,8 @@ const Input: ForwardRefRenderFunction<string | null, InputProps> = (props, ref) 
       {errorMassage && <span className={styles.error}>{errorMassage}</span>}
     </div>
   );
-};
+});
 
-export default React.forwardRef(Input);
+Input.displayName = "Input";
+
+export default Input;
