@@ -1,16 +1,16 @@
-import { signUp } from "@/lib/firebase/utils/auth";
-import { useRouter } from "next/router";
 import { useState } from "react";
+
+import { useRouter } from "next/router";
+
+import { signUp } from "@/lib/firebase/utils/auth";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
 
-  const handleForm = async (e: any) => {
-    e.preventDefault();
-
-    const { result, error } = await signUp(email, password);
+  const handleForm = async () => {
+    const { error, result } = await signUp(email, password);
 
     if (error) {
       return console.log(error);
@@ -24,27 +24,27 @@ const Login = () => {
     <div className="wrapper">
       <div className="form-wrapper">
         <h1 className="mt-60 mb-30">Sign up</h1>
-        <form onSubmit={handleForm} className="form">
+        <form className="form" onSubmit={handleForm}>
           <label htmlFor="email">
             <p>Email</p>
             <input
+              id="email"
+              name="email"
               onChange={(e) => setEmail(e.target.value)}
+              placeholder="example@mail.com"
               required
               type="email"
-              name="email"
-              id="email"
-              placeholder="example@mail.com"
             />
           </label>
           <label htmlFor="password">
             <p>Password</p>
             <input
+              id="password"
+              name="password"
               onChange={(e) => setPassword(e.target.value)}
+              placeholder="password"
               required
               type="password"
-              name="password"
-              id="password"
-              placeholder="password"
             />
           </label>
           <button type="submit">Sign up</button>

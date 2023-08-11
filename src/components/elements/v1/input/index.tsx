@@ -1,17 +1,20 @@
-import React, { CSSProperties, FC, useState } from "react";
-import styles from "./Input.module.scss";
+import React, { useState } from "react";
+import type { CSSProperties, FC } from "react";
+
 import cx from "classnames";
 
+import styles from "./Input.module.scss";
+
 export interface InputProps {
-  label: String;
-  type?: "text" | "email" | "password" | "tel";
-  width?: CSSProperties["width"];
-  height?: CSSProperties["height"];
-  value: string;
-  placeholder?: string;
   errorMassage?: string;
-  supportText?: string;
+  height?: CSSProperties["height"];
+  label: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  placeholder?: string;
+  supportText?: string;
+  type?: "text" | "email" | "password" | "tel";
+  value: string;
+  width?: CSSProperties["width"];
 }
 
 const Input: FC<InputProps> = (props) => {
@@ -19,15 +22,15 @@ const Input: FC<InputProps> = (props) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const {
+    errorMassage,
+    height = "2em",
     label,
+    onChange,
+    placeholder = "テキストを入力してください",
+    supportText,
     type = "text",
     value,
-    placeholder = "テキストを入力してください",
-    onChange,
     width = "18.4375rem",
-    height = "2em",
-    supportText,
-    errorMassage,
   } = props;
 
   return (
@@ -35,23 +38,23 @@ const Input: FC<InputProps> = (props) => {
       <label htmlFor="input">{label}</label>
       {supportText && <span>{supportText}</span>}
       <input
-        id="input"
-        style={{ width, height }}
-        type={showPassword ? "text" : type}
         className={cx(styles.input, errorMassage && styles.error)}
-        placeholder={isFocused ? "入力中..." : placeholder}
-        value={value}
+        id="input"
+        onBlur={() => setIsFocused(false)}
         onChange={onChange}
         onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
+        placeholder={isFocused ? "入力中..." : placeholder}
+        style={{ height, width }}
+        type={showPassword ? "text" : type}
+        value={value}
       />
       {type === "password" && (
         <button
-          type="button"
           className={styles.passwordButton}
           onClick={() => {
             setShowPassword((prev) => !prev);
           }}
+          type="button"
         >
           {showPassword ? "🐵" : "🙈"}
         </button>

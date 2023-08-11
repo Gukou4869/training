@@ -1,9 +1,12 @@
-import { StoryFn, Meta } from "@storybook/react";
-import Button, { ButtonProps, ButtonType } from ".";
+import Button from ".";
+
+import type { ButtonProps, ButtonType } from ".";
+import type { StoryFn, Meta } from "@storybook/react";
+
 
 export default {
-  title: "Components/Button",
   component: Button,
+  title: "Components/Button",
 } as Meta;
 
 const Template: StoryFn<ButtonProps> = () => {
@@ -22,7 +25,7 @@ const Template: StoryFn<ButtonProps> = () => {
         {typeVariants.map((type) => {
           return (
             <th key={type}>
-              <Button type={type} text="ボタン" />
+              <Button text="ボタン" type={type} />
             </th>
           );
         })}
@@ -32,7 +35,7 @@ const Template: StoryFn<ButtonProps> = () => {
         {typeVariants.map((type) => {
           return (
             <th key={type}>
-              <Button type={type} text="ボタン" disabled />
+              <Button disabled text="ボタン" type={type} />
             </th>
           );
         })}
@@ -43,7 +46,7 @@ const Template: StoryFn<ButtonProps> = () => {
 
 export const Default = Template.bind({});
 Default.args = {
-  text: "Click Me",
   disabled: true,
+  text: "Click Me",
 };
 Default.storyName = "Button";

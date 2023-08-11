@@ -3,6 +3,7 @@ import {
   getAuth,
   signInWithEmailAndPassword,
 } from "firebase/auth";
+
 import { getFirebaseApp } from "../init";
 
 const auth = getAuth(getFirebaseApp());
@@ -16,7 +17,7 @@ export async function signUp(email: string, password: string) {
     error = e;
   }
 
-  return { result, error };
+  return { error, result };
 }
 
 export async function signIn(email: string, password: string) {
@@ -28,5 +29,5 @@ export async function signIn(email: string, password: string) {
     error = e;
   }
 
-  return { result, error };
+  return { error, result };
 }

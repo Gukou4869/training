@@ -23,6 +23,7 @@
       "@/*": ["./src/*"]
     }
   },
+  "extends": "@tsconfig/next/tsconfig.json",
   // Lint ".storybook" folder (don't ignore it)
   "ignorePatterns": ["!.storybook"],
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "createPage.ts"],

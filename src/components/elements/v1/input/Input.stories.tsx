@@ -1,9 +1,11 @@
-import { StoryFn, Meta } from "@storybook/react";
-import Input, { InputProps } from ".";
+import Input from ".";
+
+import type { InputProps } from ".";
+import type { StoryFn, Meta } from "@storybook/react";
 
 export default {
-  title: "Components/Input",
   component: Input,
+  title: "Components/Input",
 } as Meta;
 
 const Template: StoryFn<InputProps> = (args: InputProps) => <Input {...args} />;

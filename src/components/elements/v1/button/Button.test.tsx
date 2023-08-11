@@ -1,7 +1,9 @@
 import React from "react";
-import { render, fireEvent } from "@testing-library/react";
+
+import { render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import userEvent from "@testing-library/user-event";
+
 import Button from ".";
 
 describe("Button", () => {
@@ -11,7 +13,7 @@ describe("Button", () => {
   });
 
   test("has the correct style", () => {
-    const { getByText } = render(<Button type="secondary" text="Test button" />);
+    const { getByText } = render(<Button text="Test button" type="secondary" />);
     expect(getByText("Test button")).toHaveClass("secondary");
   });
 
@@ -25,7 +27,7 @@ describe("Button", () => {
     const onClick = jest.fn();
     const user = userEvent.setup();
 
-    const { getByText } = render(<Button text="Test button" onClick={onClick} />);
+    const { getByText } = render(<Button onClick={onClick} text="Test button" />);
     await user.click(getByText("Test button"));
     expect(onClick).toHaveBeenCalled();
   });

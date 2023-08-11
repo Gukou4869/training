@@ -1,8 +1,9 @@
 "use client";
 
-import Link from "next/link";
-import { useStore } from "@/stores";
 import Head from "next/head";
+import Link from "next/link";
+
+import { useStore } from "@/stores";
 
 const Count = () => {
   const count = useStore((state) => state.count);

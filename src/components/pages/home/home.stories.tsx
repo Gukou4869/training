@@ -1,9 +1,11 @@
-import { StoryFn, Meta } from '@storybook/react';
     import Home from '.';
+
+import type { StoryFn, Meta } from '@storybook/react';
+
     
     export default {
-      title: 'Pages/Home',
       component: Home,
+      title: 'Pages/Home',
     } as Meta;
     
     const Template: StoryFn = () => <Home />;
