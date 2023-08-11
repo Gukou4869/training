@@ -54,6 +54,7 @@
     "@tsconfig/next": "^2.0.0",
     "@typescript-eslint/eslint-plugin": "^6.3.0",
     "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-sort-destructure-keys": "^1.5.0",
     "eslint-plugin-sort-keys-fix": "^1.1.2",
     "eslint-plugin-storybook": "^0.6.12",
