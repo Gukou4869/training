@@ -1,11 +1,14 @@
 @use "/src/styles/ui-mixins" as *;
 
+$width: var(--input-width);
+
 .inputContainer {
   align-items: flex-start;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  position: absolute;
+  position: relative;
+  width: $width;
 }
 
 .input {
@@ -19,6 +22,7 @@
   outline: none;
   padding: 0.75rem 1rem;
   transition: border-color 0.2s;
+  width: calc($width - 2rem);
 
   &:focus {
     border: 2px solid theme(borderlight, focused);
@@ -31,6 +35,11 @@
   }
 }
 
+.required {
+  color: theme(textlight, alert);
+  margin-left: 0.5em;
+}
+
 .passwordButton {
   background-color: transparent;
   border: none;
@@ -38,7 +47,7 @@
   font-size: 1.25rem;
   outline: none;
   position: absolute;
-  right: 0.5rem;
+  right: 0;
   top: 2.725rem;
 }
 
