@@ -1,7 +1,8 @@
 "use client";
 
 import Head from "next/head";
-import Link from "next/link";
+
+import Header from "@/components/layouts/header";
 
 export default function Home() {
   return (
@@ -9,8 +10,17 @@ export default function Home() {
       <Head>
         <title>Training Support App</title>
       </Head>
-      <main>
-        <Link href={"/login"}>Login Page!!!</Link>
+      <main
+        style={{
+          alignItems: "center",
+          display: "flex",
+          justifyContent: "center",
+          minHeight: "100vh",
+          minWidth: "100vw",
+        }}
+      >
+        <Header />
+        <h1>Support Your Training</h1>
       </main>
     </div>
   );
