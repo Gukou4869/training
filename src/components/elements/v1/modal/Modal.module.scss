@@ -1,0 +1,97 @@
+@use "sass:color";
+
+$width: var(--modal-width);
+$height: var(--modal-height, auto);
+
+.modalWrapper {
+  align-items: center;
+  animation: appear var(--animation-timeout) ease-in-out 0ms 1 forwards;
+  backdrop-filter: blur(4px);
+  display: flex;
+  inset: 0;
+  justify-content: center;
+  position: absolute;
+  z-index: 100;
+
+  .modalMainBody {
+    animation: inherit;
+    animation-delay: calc(var(--animation-timeout) + 50ms);
+    animation-name: appear-from-top;
+    height: $height;
+    opacity: 0;
+    position: relative;
+    width: $width;
+
+    &.withAspect {
+      aspect-ratio: 16 / 9;
+    }
+
+    .modalHeader {
+      padding: 1em;
+      position: relative;
+      width: 100%;
+
+      h2 {
+        margin: 0;
+        text-align: center;
+      }
+    }
+
+    .closeBtnArea {
+      position: absolute;
+      right: 0.5em;
+      top: 0.5em;
+    }
+  }
+
+  &.closing {
+    animation-delay: calc(var(--animation-timeout) - 100ms);
+    animation-name: fadeout;
+
+    .modalMainBody {
+      animation-delay: 0ms;
+      animation-name: fadeout;
+    }
+  }
+}
+
+.modalBackdrop {
+  background-color: color.adjust(#000, $alpha: -0.7);
+  border: 0;
+  inset: 0;
+  padding: 0;
+  position: absolute;
+  z-index: -1;
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes appear-from-top {
+  0% {
+    opacity: 0;
+    transform: translateY(-1em);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeout {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
