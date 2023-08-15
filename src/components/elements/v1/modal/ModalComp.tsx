@@ -92,7 +92,13 @@ const ModalComponent: FC<ModalComponentProps> = (props) => {
                   }
                 }
               }}
-              style={{ height: modalHeight ? "auto" : "100%" }}
+              style={{
+                alignItems: "center",
+                display: "flex",
+                height: modalHeight ? "auto" : "100%",
+                justifyContent: "center",
+                zIndex: "200",
+              }}
             >
               {typeof children === "function" ? children({ closeModal: handleAnimatedUnmount }) : children}
             </div>

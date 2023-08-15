@@ -8,7 +8,6 @@ import Input from "../input";
 import styles from "./Form.module.scss";
 
 export interface FormProps {
-  // you can write prop here
   onSubmit: (email: string, password: string) => void;
 }
 
@@ -20,6 +19,7 @@ const Form: FC<FormProps> = (props) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log(emailRef.current, passwordRef.current);
     onSubmit(emailRef.current, passwordRef.current);
   };
 

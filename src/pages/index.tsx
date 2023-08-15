@@ -6,9 +6,10 @@ import { motion } from "framer-motion";
 import Head from "next/head";
 
 import Button from "@/components/elements/v1/button";
-import { Modal } from "@/components/elements/v1/modal";
+import LoginModal from "@/components/elements/v1/loginModal";
 import { modalPortalId } from "@/components/elements/v1/modal/ModalPortal";
 import Header from "@/components/layouts/header";
+import { signIn } from "@/lib/firebase/utils/auth";
 
 import type { Variants } from "framer-motion";
 
@@ -59,14 +60,13 @@ export default function Home() {
           Support Your Training
         </motion.h1>
       </main>
-      <Modal
+      <LoginModal
         isOpen={isOpen}
         onModalClose={() => {
           setIsOpen(false);
         }}
-      >
-        <div className="">test modal</div>
-      </Modal>
+        onSubmit={signIn}
+      />
       <div aria-hidden id={modalPortalId} />
     </div>
   );
