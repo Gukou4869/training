@@ -1,17 +1,19 @@
- import Modal from '.';
+import { Modal } from ".";
 
- import type { ModalProps } from '.';
-import type { StoryFn, Meta } from '@storybook/react';
+import type { ModalComponentProps } from "./types";
+import type { StoryFn, Meta } from "@storybook/react";
 
-  
-  export default {
-    component: Modal,
-    title: 'Components/Modal',
-  } as Meta;
-  
-  const Template: StoryFn<ModalProps> = (args:ModalProps) => <Modal {...args} />;
-  
-  export const Default = Template.bind({});
-  Default.args = {};
-  Default.storyName = "Modal"
-  
+export default {
+  component: Modal,
+  title: "Components/Modal",
+} as Meta;
+
+const Template: StoryFn<ModalComponentProps> = (args: ModalComponentProps) => (
+  <Modal {...args}>
+    <div className="">test Modal</div>
+  </Modal>
+);
+
+export const Default = Template.bind({});
+Default.args = {};
+Default.storyName = "Modal";

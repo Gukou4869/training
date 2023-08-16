@@ -1,0 +1,18 @@
+.loading {
+  align-items: center;
+  background-color: #000;
+  color: #fff;
+  display: flex;
+  inset: 0;
+  justify-content: center;
+  min-height: 100vh;
+  min-width: 100vh;
+  position: absolute;
+
+  > div {
+    left: 50%;
+    min-width: 10rem;
+    position: absolute;
+    transform: translateX(-50%);
+  }
+}

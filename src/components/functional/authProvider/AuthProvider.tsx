@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { onAuthStateChanged, getAuth } from "firebase/auth";
 import { useRouter } from "next/navigation";
 
+import Loading from "@/components/elements/v1/loading";
 import { getFirebaseApp } from "@/lib/firebase/utils/init";
 
 import type { User } from "firebase/auth";
@@ -33,12 +34,13 @@ export const AuthContextProvider: FC<AuthContextProviderProps> = ({ children }) 
         await router.push("/dashboard");
       } else {
         setUser(null);
+        await router.push("/");
       }
       setLoading(false);
     });
 
     return () => unsubscribe();
-  }, []);
+  }, [router]);
 
-  return <AuthContext.Provider value={{ user }}>{loading ? <div>Loading...</div> : children}</AuthContext.Provider>;
+  return <AuthContext.Provider value={{ user }}>{loading ? <Loading /> : children}</AuthContext.Provider>;
 };
