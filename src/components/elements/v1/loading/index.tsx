@@ -13,10 +13,10 @@ const loadingVariants: Variants = {
   },
   exit: {
     transition: {
-      duration: 0.4,
-      ease: "easeInOut",
+      duration: 0.3,
+      ease: "easeOut",
     },
-    x: "-100%",
+    x: "-100vw",
   },
 };
 
