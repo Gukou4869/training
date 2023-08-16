@@ -1,4 +1,5 @@
-import React, { forwardRef } from "react";
+import type { FC } from "react";
+import React from "react";
 
 import cx from "classnames";
 
@@ -32,7 +33,7 @@ export interface ButtonProps {
   type?: ButtonType;
 }
 
-const Button = forwardRef<HTMLButtonElement, ButtonProps>((props) => {
+const Button: FC<ButtonProps> = (props) => {
   const { className, disabled, onClick, text, type = "primary" } = props;
 
   return (
@@ -40,8 +41,6 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props) => {
       {text}
     </button>
   );
-});
-
-Button.displayName = "Button";
+};
 
 export default Button;

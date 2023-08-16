@@ -5,7 +5,7 @@ import cx from "classnames";
 
 import useOnKeyPress from "@/hooks/useOnKeyPress";
 import { sleep } from "@/lib/sleep";
-import { pageWrapperId } from "@/pages";
+import { pageWrapperId } from "@/pages/_app";
 
 import styles from "./Modal.module.scss";
 import ModalPortal from "./ModalPortal";

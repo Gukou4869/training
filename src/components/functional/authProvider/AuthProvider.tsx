@@ -6,6 +6,7 @@ import Router from "next/router";
 
 import Loading from "@/components/elements/v1/loading";
 import { getFirebaseApp } from "@/lib/firebase/utils/init";
+import { sleep } from "@/lib/sleep";
 
 import type { User } from "firebase/auth";
 
@@ -33,6 +34,7 @@ export const AuthContextProvider: FC<AuthContextProviderProps> = ({ children }) 
         Router.push("/");
       }
 
+      await sleep(800);
       setLoading(false);
     });
 

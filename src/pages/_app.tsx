@@ -14,6 +14,7 @@ const App = ({ Component, pageProps }: AppProps) => {
       <Head>
         <title>Training Support App</title>
         <meta content="#FFF" name="theme-color" />
+        <meta content="著者: S.Taniguchi" name="Description" />
       </Head>
       <AuthContextProvider>
         <Component {...pageProps} />
