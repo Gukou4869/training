@@ -1,8 +1,8 @@
 import type { FC } from "react";
 import React, { useEffect, useState } from "react";
 
-import { onAuthStateChanged, getAuth } from "firebase/auth";
-import { useRouter } from "next/navigation";
+import { getAuth, getRedirectResult } from "firebase/auth";
+import Router from "next/router";
 
 import Loading from "@/components/elements/v1/loading";
 import { getFirebaseApp } from "@/lib/firebase/utils/init";
@@ -20,27 +20,25 @@ interface AuthContextProviderProps {
 }
 
 export const AuthContextProvider: FC<AuthContextProviderProps> = ({ children }) => {
-  const router = useRouter();
-
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      console.log(user);
-
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      console.log(user, "🔥🔥🔥🔥🔥");
       if (user) {
         setUser(user);
-        await router.push("/dashboard");
+        Router.push("/dashboard");
       } else {
         setUser(null);
-        await router.push("/");
+        Router.push("/");
       }
+      getRedirectResult(auth);
       setLoading(false);
     });
 
     return () => unsubscribe();
-  }, [router]);
+  }, []);
 
   return <AuthContext.Provider value={{ user }}>{loading ? <Loading /> : children}</AuthContext.Provider>;
 };
