@@ -1,6 +1,6 @@
 module.exports = {
   extends: ["plugin:@typescript-eslint/recommended", "next/core-web-vitals", "prettier"],
-  plugins: ["import", "sort-keys-fix", "typescript-sort-keys", "sort-destructure-keys", "unused-imports"],
+  plugins: ["import", "sort-keys-fix", "typescript-sort-keys", "sort-destructure-keys"],
   rules: {
     "import/order": [
       //importの読み込み順のルール
@@ -31,7 +31,6 @@ module.exports = {
     "react/jsx-sort-props": "error", // JSXの属性をアルファベット順にソート
     "sort-keys-fix/sort-keys-fix": "error", // オブジェクトのキーをアルファベット順に自動でソート
     "typescript-sort-keys/interface": "error", // TypeScriptのインターフェースのキーをアルファベット順に自動でソート
-    "unused-imports/no-unused-imports": "error", // 使っていないimportは削除
     "sort-destructure-keys/sort-destructure-keys": 2, //分割代入をアルファベット順に自動でソート
     "no-param-reassign": [2, { props: false }], //パラメーターのプロパティ変更を許可
     "@typescript-eslint/consistent-type-imports": ["error", { prefer: "type-imports" }], //型はimport typeで表示
