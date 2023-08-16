@@ -1,11 +1,12 @@
 import type { FC } from "react";
-import React, { useEffect, useState } from "react";
+import React, { useLayoutEffect, useState } from "react";
 
-import { getAuth, getRedirectResult } from "firebase/auth";
+import { getAuth } from "firebase/auth";
 import Router from "next/router";
 
 import Loading from "@/components/elements/v1/loading";
 import { getFirebaseApp } from "@/lib/firebase/utils/init";
+import { sleep } from "@/lib/sleep";
 
 import type { User } from "firebase/auth";
 
@@ -23,8 +24,8 @@ export const AuthContextProvider: FC<AuthContextProviderProps> = ({ children }) 
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
+  useLayoutEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(async (user) => {
       console.log(user, "🔥🔥🔥🔥🔥");
       if (user) {
         setUser(user);
@@ -33,12 +34,18 @@ export const AuthContextProvider: FC<AuthContextProviderProps> = ({ children }) 
         setUser(null);
         Router.push("/");
       }
-      getRedirectResult(auth);
+
+      await sleep(800);
       setLoading(false);
     });
 
     return () => unsubscribe();
   }, []);
 
-  return <AuthContext.Provider value={{ user }}>{loading ? <Loading /> : children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={{ user }}>
+      <Loading isLoading={loading} />
+      {children}
+    </AuthContext.Provider>
+  );
 };

@@ -1,10 +1,31 @@
+import type { FC } from "react";
 import { useState, useEffect } from "react";
 
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 import styles from "./Loading.module.scss";
 
-const Loading: React.FC = () => {
+import type { Variants } from "framer-motion";
+
+const loadingVariants: Variants = {
+  animate: {
+    opacity: 1,
+  },
+  exit: {
+    transition: {
+      duration: 0.4,
+      ease: "easeInOut",
+    },
+    x: "-100%",
+  },
+};
+
+interface LoadingProps {
+  isLoading?: boolean;
+}
+
+const Loading: FC<LoadingProps> = (props) => {
+  const { isLoading } = props;
   const [dots, setDots] = useState(0);
 
   useEffect(() => {
@@ -23,12 +44,23 @@ const Loading: React.FC = () => {
   };
 
   return (
-    <motion.div animate={{ opacity: 1 }} className={styles.loading} exit={{ opacity: 0 }} initial={{ opacity: 0 }}>
-      <div>
-        Loading
-        <span>{renderDots()}</span>
-      </div>
-    </motion.div>
+    <AnimatePresence mode="wait">
+      {isLoading && (
+        <motion.div
+          animate="animate"
+          className={styles.loading}
+          exit="exit"
+          initial="animate"
+          key="loading"
+          variants={loadingVariants}
+        >
+          <div>
+            Loading
+            <span>{renderDots()}</span>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
 
