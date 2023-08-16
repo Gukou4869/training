@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp, getApps, getApp } from "firebase/app";
 
-import type { FirebaseApp} from "firebase/app";
+import type { FirebaseApp } from "firebase/app";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -19,7 +19,6 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-console.log("🚀 ~ file: index.ts:20 ~ app:", app);
 
 export const getFirebaseApp = (): FirebaseApp => {
   return !getApps().length ? app : getApp();

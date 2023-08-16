@@ -19,7 +19,6 @@ const Form: FC<FormProps> = (props) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(emailRef.current, passwordRef.current);
     onSubmit(emailRef.current, passwordRef.current);
   };
 
